@@ -105,8 +105,18 @@ class App extends Component {
 
   renderTaskCreator() {
     return <div className="task-wrapper">
-      <div className="check-button"><Checkbox checked={this.state.TaskIsDone} onChange={this.newTaskStatusOnChange}/></div>
-      <input className="task-input" placeholder="Create a new task" value={this.state.newTaskName} onChange={this.newTaskNameOnChange}/>
+      <div className="check-button">
+        <Checkbox
+          checked={this.state.TaskIsDone}
+          onChange={this.newTaskStatusOnChange}
+        />
+      </div>
+      <input
+        className="task-input"
+        placeholder="Create a new task"
+        value={this.state.newTaskName}
+        onChange={this.newTaskNameOnChange}
+      />
       <div className="create-button" onClick={this.CreateTask}>Create</div>
     </div>
   }
