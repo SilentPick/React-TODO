@@ -2,20 +2,14 @@ import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Checkbox from '@material-ui/core/Checkbox';
 import firebase from './firebase';
-import logo from './logo.svg';
 import * as _ from 'lodash';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Task  from './Components/Task';
 import './App.css';
-
-
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
-
   return result;
 };
 
@@ -52,7 +46,6 @@ class App extends Component {
   }
 
   onDragEnd = (result) => {
-    // dropped outside the list
     if (!result.destination) {
       return;
     }
@@ -62,7 +55,6 @@ class App extends Component {
       result.source.index,
       result.destination.index
     );
-
 
     this.setState({
       tasks,
@@ -97,7 +89,6 @@ class App extends Component {
 
   taskDelete = (id) => () => {
     firebase.database().ref('tasks/' + id).remove();
-    console.log('is deleted id = ' + id)
   }
 
   taskRename = (id) => (e) => {
