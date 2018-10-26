@@ -24,13 +24,12 @@ class App extends Component {
   state={
     newTaskName: '',
     newTaskDone: false,
-    searchValue: '',
     filterTask: 'all',
   }
 
   componentDidMount(){
-    const starCountRef = firebase.database().ref('tasks');
-    starCountRef.on('value',(snapshot) => {
+    const tasksRef = firebase.database().ref('tasks');
+    tasksRef.on('value',(snapshot) => {
       this.setState({
         tasks: convertTaskToArray(snapshot.val())
       })
@@ -79,7 +78,7 @@ class App extends Component {
     });
   }
 
-  CreateTask = () => {
+  createTask = () => {
     const newTaskKey = firebase.database().ref().child('tasks').push().key;
     firebase.database().ref('tasks/' + newTaskKey).set({
       name: this.state.newTaskName,
@@ -95,12 +94,6 @@ class App extends Component {
     firebase.database().ref('tasks/' + id).update({
       name: e.target.value
     });
-  }
-
-  searchValueOnChange = (e) => {
-    this.setState({
-      searchValue: e.target.value
-    })
   }
 
   renderTaskCreator() {
